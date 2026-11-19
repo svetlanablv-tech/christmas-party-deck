@@ -1,0 +1,1113 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Merry Mayhem</title>
+<meta name="theme-color" content="#14392F">
+<meta name="description" content="Merry Mayhem: 80 Christmas party game cards. Press once, read it out loud, play. Works offline.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/icon-180.png">
+<style>@font-face{font-family:'Atkinson Hyperlegible';font-style:normal;font-weight:400;font-display:swap;src:url(fonts/AtkinsonHyperlegible-0.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'Atkinson Hyperlegible';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/AtkinsonHyperlegible-1.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:500;font-display:swap;src:url(fonts/DMSans-2.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+@font-face{font-family:'DM Sans';font-style:normal;font-weight:700;font-display:swap;src:url(fonts/DMSans-2.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;}
+</style>
+<style>
+/* Layout concept: one column on deep evergreen. The bright cards are the only color, so they read first. */
+:root{
+  --navy:#14392F; --navy2:#1F4D40; --paper:#F7F2E9; --muted:#BFD6CC; --peach:#F7D58B; --ink:#2C3956;
+  --line:rgba(247,242,233,.22);
+  --font-display:'DM Sans',system-ui,sans-serif; --font-body:'Atkinson Hyperlegible',system-ui,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{margin:0;background:var(--navy);color:var(--paper);font-family:var(--font-body);font-size:18px;line-height:1.45;
+  padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));
+  padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+#app{max-width:460px;margin:0 auto;min-height:100%;display:flex;flex-direction:column}
+.screen{flex:1;display:flex;flex-direction:column;gap:18px;padding-block:14px 26px}
+.screen[hidden]{display:none}
+.top{display:flex;justify-content:space-between;align-items:center;min-height:44px}
+.brand{font-family:var(--font-display);font-weight:700;letter-spacing:.2em;text-transform:uppercase;font-size:.8rem;color:var(--muted)}
+button{font:inherit;color:inherit;cursor:pointer}
+.link{background:none;border:0;color:var(--muted);text-decoration:underline;text-underline-offset:3px;padding:10px 4px;min-height:44px}
+:focus-visible{outline:3px solid var(--peach);outline-offset:3px;border-radius:8px}
+[tabindex="-1"]:focus{outline:none}
+h1,h2{font-family:var(--font-display);font-weight:700;letter-spacing:-.01em;line-height:1.15;margin:0}
+h2{font-size:1.5rem}
+p{margin:0}
+.small{color:var(--muted);font-size:.9rem}
+
+/* home */
+.center{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding-block:6px}
+.boost{position:relative;width:min(62vw,250px);aspect-ratio:1;border-radius:50%;border:0;background:#A3192E;color:#FFF8EC;
+  font-family:var(--font-display);font-weight:700;font-size:clamp(1.25rem,5.6vw,1.6rem);letter-spacing:.1em;
+  box-shadow:0 0 0 14px rgba(247,213,139,.16),0 0 0 32px rgba(247,213,139,.08);animation:pulse 6s ease-in-out infinite}
+.boost:active{transform:scale(.97)}
+.boost{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35em}
+.boost .pl{width:34%;height:auto;fill:#FFF8EC}
+.msg.ok{color:var(--paper);font-weight:700}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 14px rgba(247,213,139,.16),0 0 0 32px rgba(247,213,139,.08)}50%{box-shadow:0 0 0 20px rgba(247,213,139,.14),0 0 0 42px rgba(247,213,139,.06)}}
+.hint{color:var(--muted);text-align:center}
+.toggle{display:flex;gap:14px;align-items:center;background:var(--navy2);border-radius:16px;padding:14px 16px;cursor:pointer;min-height:64px}
+.toggle input{position:absolute;opacity:0;pointer-events:none}
+.knob{flex:none;width:52px;height:30px;border-radius:99px;background:#3E6B5D;position:relative;transition:background .2s}
+.knob::after{content:"";position:absolute;left:3px;top:3px;width:24px;height:24px;border-radius:50%;background:var(--paper);transition:transform .2s}
+.toggle input:checked+.knob{background:#D7263D}
+.toggle input:checked+.knob::after{transform:translateX(22px)}
+.toggle input:focus-visible+.knob{outline:3px solid var(--peach);outline-offset:3px}
+.toggle b{display:block;font-family:var(--font-display)}
+.toggle small{color:var(--muted);font-size:.85rem;line-height:1.3;display:block}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{min-height:52px;border-radius:14px;border:1.5px solid var(--line);background:transparent;padding:10px 12px;font-family:var(--font-display);font-weight:700;font-size:.95rem;line-height:1.2}
+.btn.primary{background:var(--peach);color:var(--ink);border-color:var(--peach)}
+.btn.full{grid-column:1/-1}
+.pick{grid-column:1/-1;display:flex;flex-direction:column;gap:8px}
+.lbl{font-size:.85rem;color:var(--muted);text-align:center}
+.pick .lbl{font-size:.85rem;color:var(--muted);text-align:center}
+.chips{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip{min-height:44px;border-radius:99px;border:1.5px solid var(--line);background:transparent;padding:6px 14px 6px 10px;font-family:var(--font-display);font-weight:700;font-size:.9rem;display:flex;align-items:center;gap:8px}
+.chip i{width:16px;height:16px;border-radius:50%;flex:none}
+.chip:active{transform:scale(.97)}
+.btn:active{transform:scale(.98)}
+/* short phones: keep the whole home screen in view, nothing to scroll for */
+@media (max-height:760px){
+  .screen{gap:10px;padding-block:6px 12px}
+  #s-home .center{gap:6px;padding-block:2px;flex:none}
+  #s-home .boost{width:min(34vw,128px);font-size:1rem;box-shadow:0 0 0 7px rgba(247,213,139,.16),0 0 0 15px rgba(247,213,139,.08);animation:none}
+  #s-home .hint{display:none}
+  .toggle{min-height:54px;padding:8px 14px}
+  .btn{min-height:44px;padding:6px 10px}
+  .row{gap:8px}
+  .pick{gap:6px}
+  .chip{min-height:40px;padding:4px 10px 4px 8px;font-size:.85rem;gap:6px}
+  .chips{gap:6px}
+}
+.btn small{font-weight:400;font-family:var(--font-body);color:inherit;opacity:.85;font-size:.85rem}
+
+/* players */
+.pform{display:flex;gap:10px}
+.pform input{flex:1;min-width:0;min-height:52px;border-radius:14px;border:1.5px solid var(--line);background:var(--navy2);color:var(--paper);font:inherit;font-size:1rem;padding:10px 14px}
+.pform input::placeholder{color:var(--muted)}
+.pform .btn{flex:none}
+.plist{display:flex;flex-wrap:wrap;gap:8px;min-height:44px}
+.plist .chip{background:var(--navy2)}
+.plist .x{font-size:1.1rem;line-height:1;opacity:.9}
+
+/* card + flip */
+.stage{display:flex;justify-content:center;perspective:1200px}
+.flip{position:relative;width:min(80vw,330px);aspect-ratio:63/88}
+.flip .face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;transition:transform .7s cubic-bezier(.3,.7,.2,1)}
+.flip .f-back{transform:rotateY(0)}
+.flip .f-front{transform:rotateY(180deg)}
+.flip.shown .f-back{transform:rotateY(-180deg)}
+.flip.shown .f-front{transform:rotateY(0)}
+.cw{container-type:inline-size;width:100%;height:100%}
+.card{width:100%;height:100%;background:var(--bg);color:var(--ink);border-radius:4.8cqw;overflow:hidden;position:relative;font-family:var(--font-body);box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.bgart{position:absolute;inset:0;width:100%;height:100%;display:block}
+.grainov{position:absolute;inset:0;background-image:var(--grain);background-size:200px 200px}
+.in{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;padding:6cqw 6.5cqw 6cqw}
+.hd{display:flex;justify-content:space-between;align-items:flex-start}
+.nm{font-family:var(--font-display);font-weight:700;font-size:3.8cqw;letter-spacing:.22em;text-transform:uppercase;padding-top:1.2cqw}
+.no{font-family:var(--font-display);font-weight:700;font-size:11cqw;line-height:1}
+.ttl{font-family:var(--font-display);font-weight:700;line-height:1;letter-spacing:-.025em;margin-top:9cqw;text-wrap:balance;font-size:13cqw}
+.txt{font-size:5.4cqw;line-height:1.34;margin-top:4.2cqw;text-wrap:pretty;max-width:50cqw}
+.sp{flex:1}
+.ft{display:flex;justify-content:space-between;align-items:center}
+.pill{font-family:var(--font-display);font-weight:700;font-size:4.6cqw;background:var(--ink);color:var(--paper);border-radius:99px;padding:1.4cqw 4cqw;white-space:nowrap}
+.tg{width:9.5cqw;height:9.5cqw;border-radius:50%;border:.6cqw solid var(--ink);display:grid;place-items:center}
+.tg svg{width:5.6cqw;height:5.6cqw;fill:none;stroke:var(--ink);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.back{width:100%;height:100%;border-radius:4.8cqw;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.35)}
+.back svg{width:100%;height:100%;display:block}
+
+/* turn + timer */
+.turn{text-align:center;font-family:var(--font-display);font-weight:700;min-height:1.4em}
+.turn[hidden]{display:none}
+.board{text-align:center;color:var(--muted);font-size:.9rem;min-height:1.3em}
+.timer{display:flex;align-items:center;justify-content:center;gap:16px;min-height:76px}
+.ring{position:relative;width:76px;height:76px;flex:none}
+.ring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6}
+.ring .bg{stroke:rgba(247,242,233,.16)}
+.ring .fg{stroke:var(--peach);stroke-linecap:round}
+.ring span{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:1rem}
+.msg{text-align:center;color:var(--muted);min-height:1.5em}
+.actions{display:flex;flex-direction:column;gap:10px}
+
+/* deck + about */
+.tabs{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px}
+.tab{flex:none;min-height:44px;padding:8px 16px;border-radius:99px;border:1.5px solid var(--line);background:transparent;font-family:var(--font-display);font-weight:700;display:flex;gap:8px;align-items:center}
+.tab[aria-selected="true"]{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+.tab i{width:14px;height:14px;border-radius:50%;display:block}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.tile{border:0;background:none;padding:0;aspect-ratio:63/88;border-radius:5cqw;text-align:left}
+.tile .cw{pointer-events:none}
+.done{align-items:center;text-align:center}
+.done .center{gap:22px}
+.badge{width:min(52vw,210px);aspect-ratio:1;border-radius:50%;background:var(--peach);color:var(--ink);display:grid;place-items:center;animation:pop .7s cubic-bezier(.3,1.6,.5,1) both}
+.badge svg{width:46%;height:46%;fill:none;stroke:var(--ink);stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.done h2{font-size:2rem;max-width:12em}
+.done .actions{width:100%}
+.scores{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;width:100%}
+.scores li{display:flex;justify-content:space-between;gap:12px;background:var(--navy2);border-radius:14px;padding:10px 16px;font-family:var(--font-display);font-weight:700}
+.scores li:first-child{background:var(--peach);color:var(--ink)}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+@media (prefers-reduced-motion:reduce){.badge{animation:none}}
+.about p{margin-bottom:12px}
+.about ul{padding-left:0;list-style:none;margin:0 0 12px;display:flex;flex-direction:column;gap:10px}
+.about li{display:flex;gap:12px;align-items:center}
+.about .tg{flex:none;width:34px;height:34px;border-color:var(--paper)}
+.about .tg svg{width:20px;height:20px;stroke:var(--paper)}
+.about a{color:var(--peach)}
+@media (prefers-reduced-motion:reduce){
+  .boost{animation:none}
+  .flip .face{transition:opacity .3s}
+  .flip .f-back,.flip .f-front{transform:none}
+  .flip .f-front{opacity:0}
+  .flip.shown .f-back{opacity:0;transform:none}
+  .flip.shown .f-front{opacity:1;transform:none}
+  .knob,.knob::after{transition:none}
+}
+
+/* ---- design B: cream card, candy-cane frame, suit ribbon ---- */
+.fr{position:absolute;inset:0;padding:4.4cqw;background:repeating-linear-gradient(-45deg,var(--c) 0 3.4cqw,#FFF8EC 3.4cqw 6.8cqw)}
+.fr .paper{position:relative;width:100%;height:100%;background:#FFF9EE;border-radius:2.4cqw;overflow:hidden}
+.fr .ribbon{height:12cqw;display:flex;justify-content:space-between;align-items:center;padding:0 5cqw;color:#FFF8EC;background:var(--c);font-family:var(--font-display,'DM Sans',sans-serif);font-weight:700}
+.fr .ribbon span{font-size:5.6cqw;letter-spacing:.14em;text-transform:uppercase}.fr .ribbon b{font-size:9cqw}
+.fr .in2{position:relative;z-index:2;height:calc(100% - 12cqw);display:flex;flex-direction:column;padding:5cqw}
+.fr .ttl{color:var(--c);margin-top:7cqw;font-size:13cqw}
+.fr .txt{color:#2C3956;font-size:8.2cqw;line-height:1.22;margin-top:4cqw;max-width:none}
+.fr .pill{background:var(--c);color:#FFF8EC;font-size:7.4cqw;padding:1.6cqw 5cqw}
+.fr .tg{width:13cqw;height:13cqw;border:.8cqw solid var(--c)}.fr .tg svg{width:8cqw;height:8cqw;stroke:var(--c)}
+.fr .hollyB{position:absolute;right:2cqw;bottom:14cqw;width:20cqw;transform:rotate(-12deg);pointer-events:none}.fr .hollyB svg{width:100%;display:block}
+</style>
+</head>
+<body>
+<main id="app">
+
+<section id="s-home" class="screen" aria-labelledby="h-home">
+  <div class="top"><span class="brand" id="h-home">Merry Mayhem</span><button class="link" data-go="about">About</button></div>
+  <div class="center">
+    <button class="boost" id="boost" aria-label="Ho ho ho button. Press to draw a card"><svg class="pl" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 2.2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 1 0 0-5.2zM3.5 17.5C3.5 10.5 8.5 6.2 15.6 7.2c-1.4 2.8-1.8 6.3-1.2 10.3zM3 18.2h15.6a1.9 1.9 0 0 1 0 3.8H3a1.9 1.9 0 0 1 0-3.8z"/></svg>HO HO HO</button>
+    <p class="hint">press once, read the card out loud,<br>then play it</p>
+  </div>
+  <label class="toggle"><input type="checkbox" id="pub"><span class="knob" aria-hidden="true"></span>
+    <span><b>No props</b><small>Hide cards that need a pen, paper or a gift</small></span></label>
+  <div class="row">
+    <button class="btn full primary" id="mRound">Quick round<br><small>10 cards, with score</small></button>
+    <button class="btn" id="mEveryone">Everyone plays<br><small>the whole table joins in</small></button>
+    <button class="btn" id="mSpot">Spotlight<br><small>one player at a time</small></button>
+    <div class="pick"><div class="lbl" id="pickLbl">Or choose a suit</div><div class="chips" id="chips" role="group" aria-labelledby="pickLbl"></div></div>
+    <button class="btn full" data-go="deck">All 80 cards</button>
+  </div>
+</section>
+
+<section id="s-setup" class="screen" hidden aria-labelledby="h-setup">
+  <div class="top"><button class="link" data-go="home">Back</button><span class="brand">Quick round</span></div>
+  <h2 id="h-setup">Who is playing?</h2>
+  <p class="small">Add 2 to 8 names. Your phone passes the turn from player to player and keeps score. Names are not saved.</p>
+  <form class="pform" id="pForm" autocomplete="off"><input id="pName" maxlength="14" placeholder="Type a name" aria-label="Player name"><button class="btn" type="submit" id="pAdd">Add</button></form>
+  <div class="plist" id="pList" aria-live="polite"></div>
+  <p class="msg" id="pMsg" role="status"></p>
+  <div class="actions"><button class="btn primary" id="pStart">Start the round</button><button class="btn" id="pNoNames">Play without names<br><small>one score for the whole table</small></button></div>
+</section>
+
+<section id="s-card" class="screen" hidden aria-label="Your card">
+  <div class="top"><button class="link" id="cardBack">Back</button><span class="brand" id="cardKind"></span></div>
+  <p class="turn" id="turn" hidden></p>
+  <div class="stage"><div class="flip" id="flip"><div class="face f-back" id="fBack"></div><div class="face f-front" id="fFront"></div></div></div>
+  <div class="timer" id="timer"></div>
+  <p class="msg" id="msg" role="status"></p>
+  <div class="actions" id="actions"></div>
+  <p class="board" id="board"></p>
+</section>
+
+<section id="s-deck" class="screen" hidden aria-label="All cards">
+  <div class="top"><button class="link" data-go="home">Back</button><span class="brand">All 80 cards</span></div>
+  <div class="tabs" id="tabs" role="tablist"></div>
+  <div class="grid" id="grid"></div>
+</section>
+
+<section id="s-done" class="screen done" hidden aria-labelledby="h-done">
+  <div class="top"><span class="brand">Merry Mayhem</span><span></span></div>
+  <div class="center">
+    <div class="badge" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3.4l2.5 5.3 5.8.8-4.2 4.1 1 5.8-5.1-2.7-5.1 2.7 1-5.8-4.2-4.1 5.8-.8z"/></svg></div>
+    <h2 id="h-done"></h2>
+    <p class="hint" id="doneSub"></p>
+    <ul class="scores" id="scoreList"></ul>
+  </div>
+  <div class="actions"><button class="btn primary" id="dAgain">Play another round</button><button class="btn" id="dHome">Back to start</button></div>
+</section>
+
+<section id="s-about" class="screen about" hidden aria-labelledby="h-about">
+  <div class="top"><button class="link" data-go="home">Back</button><span class="brand">About</span></div>
+  <h2 id="h-about">How this works</h2>
+  <p>Press HO HO HO and you get one card. Read it out loud and play it. Points are on the card. Not feeling it? Skip it and draw another. Start a <b>Quick round</b> to play 10 cards with a score, or just keep drawing for fun.</p>
+  <ul>
+    <li><span class="tg" id="ic-b"></span><span><b>Everyone plays</b>: the whole table joins in.</span></li>
+    <li><span class="tg" id="ic-a"></span><span><b>Spotlight</b>: one player at a time.</span></li>
+    <li><span class="tg" id="ic-t"></span><span><b>Needs a thing</b>: a pen, paper, a gift or a spoon.</span></li>
+  </ul>
+  <p>Five types of 16 cards: <b>Spill</b>, <b>Showtime</b>, <b>Guess</b>, <b>Team Up</b> and <b>Cheers</b>. Cards are meant to be fun for everyone: skip anything that does not feel right, and never pressure anyone. Toasts work with any drink, alcohol-free is just fine.</p>
+  <p class="small">After the first time you open it, the app works without internet. No account, no tracking. The only thing saved is your "No props" switch, on this device. Player names are not stored.</p>
+</section>
+
+</main>
+
+<script>
+const DATA = {
+  "deck": "Merry Mayhem",
+  "button": "HO HO HO",
+  "short": "Merry Mayhem",
+  "slug": "christmas-party-deck",
+  "fileSlug": "MerryMayhem",
+  "tagline": "80 party game cards for your Christmas gathering. Press once, read it out loud, play.",
+  "format": "Poker 63x88 mm, bleed 3 mm, 300 dpi",
+  "tags": {
+    "b": "Everyone plays - the whole table joins in",
+    "a": "Spotlight - one player at a time",
+    "t": "Needs a thing - a pen, paper, a gift or a spoon"
+  },
+  "suits": [
+    {
+      "id": "spill",
+      "name": "Spill",
+      "shape": "rings",
+      "pal": {
+        "bg": "#A3192E",
+        "l": "#F2D4D8",
+        "d": "#E8B4BB",
+        "a": "#FFF3E0"
+      },
+      "cards": [
+        {
+          "n": 1,
+          "title": "Nice List Brag",
+          "text": "Tell one nice thing you did this year.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 2,
+          "title": "Gift Gone Wrong",
+          "text": "Share your strangest gift. Straight face.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 3,
+          "title": "Tiny Naughty",
+          "text": "Confess one tiny holiday crime.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 4,
+          "title": "Worst Sweater",
+          "text": "Describe the ugliest sweater you know.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 5,
+          "title": "Perfect Day",
+          "text": "Describe your perfect holiday day.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 6,
+          "title": "Cookie Vote",
+          "text": "Vote for the best holiday treat.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 7,
+          "title": "Kid Gift",
+          "text": "Which gift did you love as a kid?",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 8,
+          "title": "Dream Present",
+          "text": "What gift would you give someone here?",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 9,
+          "title": "Holiday Fail",
+          "text": "Tell your best holiday disaster.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 10,
+          "title": "Santa Letter",
+          "text": "Write to Santa in three words.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 11,
+          "title": "Cozy Rank",
+          "text": "Rank fire, snow, lights, music.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 12,
+          "title": "Hidden Talent",
+          "text": "Reveal a talent no one knows about.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 13,
+          "title": "Elf Name",
+          "text": "Your elf name: favorite food + Sparkle.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 14,
+          "title": "Two Truths",
+          "text": "Three holiday facts. One is a lie.",
+          "time": "3 pts",
+          "tag": "a"
+        },
+        {
+          "n": 15,
+          "title": "Bah Humbug",
+          "text": "Name one holiday thing you could skip.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 16,
+          "title": "Table Wish",
+          "text": "Wish something kind for your neighbor.",
+          "time": "1 pt",
+          "tag": "a"
+        }
+      ]
+    },
+    {
+      "id": "showtime",
+      "name": "Showtime",
+      "shape": "phase",
+      "pal": {
+        "bg": "#145A3B",
+        "l": "#CFE6D9",
+        "d": "#A9D2BC",
+        "a": "#FFF3E0"
+      },
+      "cards": [
+        {
+          "n": 1,
+          "title": "Reindeer Walk",
+          "text": "Walk like a reindeer on ice. Rate 1-10.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 2,
+          "title": "Silent Carol",
+          "text": "Hum a carol. Table guesses in 60 sec.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 3,
+          "title": "Elf Dance",
+          "text": "Dance like an elf for ten seconds.",
+          "time": "3 pts",
+          "tag": "a"
+        },
+        {
+          "n": 4,
+          "title": "Ho Ho Ho",
+          "text": "All do a Santa laugh. Vote the best.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 5,
+          "title": "Snowman Melt",
+          "text": "Act out a snowman melting. Slowly.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 6,
+          "title": "Tree Pose",
+          "text": "Be a tree. The table adds ornaments.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 7,
+          "title": "Gift Mime",
+          "text": "Mime opening a gift you hate. Smile!",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 8,
+          "title": "Sleigh Driver",
+          "text": "Drive a sleigh through a storm.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 9,
+          "title": "Trailer Voice",
+          "text": "Say Merry Christmas like a movie trailer.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 10,
+          "title": "Snow Freeze",
+          "text": "Dance! On SNOW, freeze. Best statue wins.",
+          "time": "3 pts",
+          "tag": "b"
+        },
+        {
+          "n": 11,
+          "title": "Tinsel Strut",
+          "text": "Strut the room like a runway model.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 12,
+          "title": "Grinch Face",
+          "text": "Make your best grumpy Grinch face.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 13,
+          "title": "Candy Cane Spin",
+          "text": "Spin and pose like a candy cane.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 14,
+          "title": "Weird Wrap",
+          "text": "Mime wrapping a bike. Table guesses.",
+          "time": "3 pts",
+          "tag": "a"
+        },
+        {
+          "n": 15,
+          "title": "Royal Wave",
+          "text": "Wave like a royal on a balcony.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 16,
+          "title": "Jingle Beat",
+          "text": "Copy the leader's clapping rhythm.",
+          "time": "3 pts",
+          "tag": "b"
+        }
+      ]
+    },
+    {
+      "id": "guess",
+      "name": "Guess",
+      "shape": "stack",
+      "pal": {
+        "bg": "#1F4E8C",
+        "l": "#D3E0F2",
+        "d": "#AFC7E6",
+        "a": "#FFF3E0"
+      },
+      "cards": [
+        {
+          "n": 1,
+          "title": "Name That Song",
+          "text": "Sing three words. Table names the song.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 2,
+          "title": "Three Words",
+          "text": "Describe a holiday movie in 3 words.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 3,
+          "title": "Emoji Gift",
+          "text": "Act out a gift with only your hands.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 4,
+          "title": "Finish the Line",
+          "text": "Sing half a line. Table finishes it.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 5,
+          "title": "Quick Three",
+          "text": "Name three holiday songs in 10 sec.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 6,
+          "title": "Movie Scene",
+          "text": "Describe a movie scene. No names.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 7,
+          "title": "Yes or No",
+          "text": "Hide a holiday thing. Ten yes/no tries.",
+          "time": "3 pts",
+          "tag": "a"
+        },
+        {
+          "n": 8,
+          "title": "Lie Detector",
+          "text": "Tell a holiday story. True or made up?",
+          "time": "3 pts",
+          "tag": "a"
+        },
+        {
+          "n": 9,
+          "title": "Letter Chain",
+          "text": "Next word starts with the last letter.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 10,
+          "title": "Rhyme Time",
+          "text": "Rhyme with SNOW. Last one standing wins.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 11,
+          "title": "Draw It",
+          "text": "Draw a holiday thing. Table guesses.",
+          "time": "2 pts",
+          "tag": "t"
+        },
+        {
+          "n": 12,
+          "title": "Sound Guess",
+          "text": "Make a holiday sound. Table guesses.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 13,
+          "title": "Spot Check",
+          "text": "Look 10 sec, eyes shut, name 5 things.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 14,
+          "title": "Word Story",
+          "text": "Tell a story, one word each.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 15,
+          "title": "Odd One Out",
+          "text": "Say four holiday things. One is odd.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 16,
+          "title": "Whisper Chain",
+          "text": "Whisper a word down the line.",
+          "time": "3 pts",
+          "tag": "b"
+        }
+      ]
+    },
+    {
+      "id": "teamup",
+      "name": "Team Up",
+      "shape": "waves",
+      "pal": {
+        "bg": "#6E1425",
+        "l": "#EBD0D6",
+        "d": "#D9AAB4",
+        "a": "#FFF3E0"
+      },
+      "cards": [
+        {
+          "n": 1,
+          "title": "Snowman Duo",
+          "text": "Pairs draw a snowman, one pen, no talk.",
+          "time": "3 pts",
+          "tag": "t"
+        },
+        {
+          "n": 2,
+          "title": "Human Tree",
+          "text": "Build a tree together in 30 seconds.",
+          "time": "3 pts",
+          "tag": "b"
+        },
+        {
+          "n": 3,
+          "title": "Gift Pass",
+          "text": "Teams pass a gift around. Fastest wins.",
+          "time": "2 pts",
+          "tag": "t"
+        },
+        {
+          "n": 4,
+          "title": "Pair Pose",
+          "text": "Pairs pose like a holiday card.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 5,
+          "title": "Mirror Elf",
+          "text": "One leads, one mirrors. Switch at 20 sec.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 6,
+          "title": "Word Relay",
+          "text": "Teams name holiday words. Stuck loses.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 7,
+          "title": "Sleigh Team",
+          "text": "Four players link up as a sleigh.",
+          "time": "3 pts",
+          "tag": "b"
+        },
+        {
+          "n": 8,
+          "title": "Wrap Duel",
+          "text": "Wrap one gift each. Neat and fast wins.",
+          "time": "3 pts",
+          "tag": "t"
+        },
+        {
+          "n": 9,
+          "title": "Choir Time",
+          "text": "Teams sing a carol in a silly voice.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 10,
+          "title": "Snowball Toss",
+          "text": "Toss a paper snowball into a cup.",
+          "time": "2 pts",
+          "tag": "t"
+        },
+        {
+          "n": 11,
+          "title": "Draw Together",
+          "text": "Two players, one pen: draw a reindeer.",
+          "time": "3 pts",
+          "tag": "t"
+        },
+        {
+          "n": 12,
+          "title": "Mind Meld",
+          "text": "Pairs say one word at once. Match!",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 13,
+          "title": "Birthday Line",
+          "text": "Line up by birthday month. No words.",
+          "time": "3 pts",
+          "tag": "b"
+        },
+        {
+          "n": 14,
+          "title": "Food Relay",
+          "text": "Teams shout holiday foods. No repeats.",
+          "time": "2 pts",
+          "tag": "b"
+        },
+        {
+          "n": 15,
+          "title": "Santa Shootout",
+          "text": "Rock paper scissors. Loser tells a joke.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 16,
+          "title": "Group Pose",
+          "text": "Strike a funny group pose.",
+          "time": "1 pt",
+          "tag": "b"
+        }
+      ]
+    },
+    {
+      "id": "cheers",
+      "name": "Cheers",
+      "shape": "land",
+      "pal": {
+        "bg": "#6F4A00",
+        "l": "#F0E2C2",
+        "d": "#E2CB96",
+        "a": "#FFF3E0"
+      },
+      "cards": [
+        {
+          "n": 1,
+          "title": "Cozy Toast",
+          "text": "Raise any drink. Say one thing you love.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 2,
+          "title": "Bell Compliment",
+          "text": "Give your left neighbor a compliment.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 3,
+          "title": "Wish Whisper",
+          "text": "Name one gift you would love.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 4,
+          "title": "Group Cheer",
+          "text": "Shout a made-up holiday cheer together.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 5,
+          "title": "Thank You",
+          "text": "Thank someone here for something real.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 6,
+          "title": "Mini Speech",
+          "text": "Give a 15-second toast to the host.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 7,
+          "title": "Best Moment",
+          "text": "Share your best moment of the year.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 8,
+          "title": "Thankful Round",
+          "text": "Each says one thing they are thankful for.",
+          "time": "1 pt",
+          "tag": "b"
+        },
+        {
+          "n": 9,
+          "title": "Silly Toast",
+          "text": "Toast something silly. Socks? Snow?",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 10,
+          "title": "New Year Wish",
+          "text": "Share one small wish for next year.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 11,
+          "title": "Gift Idea",
+          "text": "Name a perfect gift for your neighbor.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 12,
+          "title": "Helper Hero",
+          "text": "Name someone who helped you this year.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 13,
+          "title": "Snack Speech",
+          "text": "Give your favorite snack a speech.",
+          "time": "2 pts",
+          "tag": "a"
+        },
+        {
+          "n": 14,
+          "title": "Kind Words",
+          "text": "Write one kind word. Pass it on.",
+          "time": "2 pts",
+          "tag": "t"
+        },
+        {
+          "n": 15,
+          "title": "Memory Lane",
+          "text": "Share a favorite holiday memory.",
+          "time": "1 pt",
+          "tag": "a"
+        },
+        {
+          "n": 16,
+          "title": "Cheers to Us",
+          "text": "Say cheers in any language. Glasses up!",
+          "time": "1 pt",
+          "tag": "b"
+        }
+      ]
+    }
+  ],
+  "extras": [
+    {
+      "id": "howto",
+      "title": "How to Play",
+      "text": "Take turns drawing a card. Read it out loud and do it. Points are on the card. Skip any card you do not like. Scan the code on the back to open the app."
+    }
+  ]
+};
+const TAG = {
+  b:{label:'Everyone plays',d:'<circle cx="12" cy="8" r="2.6"/><circle cx="5.2" cy="10.2" r="2"/><circle cx="18.8" cy="10.2" r="2"/><path d="M7.4 19c0-3 2-5 4.6-5s4.6 2 4.6 5M2.5 18c0-2.2 1.3-3.8 3-4M21.5 18c0-2.2-1.3-3.8-3-4"/>'},
+  a:{label:'Spotlight',d:'<path d="M12 3.4l2.5 5.3 5.8.8-4.2 4.1 1 5.8-5.1-2.7-5.1 2.7 1-5.8-4.2-4.1 5.8-.8z"/>'},
+  t:{label:'Needs a thing',d:'<path d="M4 8l8-4 8 4v8l-8 4-8-4z"/><path d="M4 8l8 4 8-4M12 12v8"/>'}
+};
+const svgIcon=d=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+d+'</svg>';
+const esc=s=>String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+const PAL=Object.fromEntries(DATA.suits.map(s=>[s.id,s.pal]));
+const SH=Object.fromEntries(DATA.suits.map(s=>[s.id,s.shape]));
+/* ---- abstract shapes, one pattern per suit, varied by card number (same as the printed cards) ---- */
+const rng=seed=>{let s=seed*7919+104729;return()=>{s=(s*9301+49297)%233280;return s/233280}};
+const wave=(y,amp,ph,fill,cyc)=>{let d=`M-6 ${y}`;for(let x=-6;x<=70;x+=1.5)d+=` L${x} ${(y+amp*Math.sin(x/63*Math.PI*2*cyc+ph)).toFixed(2)}`;return `<path d="${d} V98 H-6Z" fill="${fill}"/>`};
+const C=(x,y,r,f)=>`<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${f}"/>`;
+let clipN=0;
+function shapes(id,n){
+  const P=PAL[id], r=rng(n+id.length*13), top=C(58,5,17,P.l)+C(58,5,9,P.bg);
+  if(SH[id]==='rings'){const cx=14+r()*36, cy=90+r()*8, s=.7+n*.03; let o='';[[58,P.l],[46,P.d],[34,P.l],[23,P.d],[12,P.a]].forEach(([rad,f])=>o+=C(cx,cy,rad*s,f));return top+o}
+  if(SH[id]==='stack'){const k=3+Math.ceil(n/6), cols=[P.d,P.l,P.d,P.a,P.d]; let y=90,o='';
+    for(let i=0;i<k;i++){const w=Math.max(16,46-i*8),h=7.2,x=(8+r()*26)+(46-w)/2-6;o+=`<rect x="${x.toFixed(1)}" y="${(y-h).toFixed(1)}" width="${w}" height="${h+6}" rx="3.6" fill="${cols[i%5]}"/>`;y-=h*.82}return top+o}
+  if(SH[id]==='phase'){const dx=(n-8.5)*3.2,id2='mc'+(++clipN);return top+C(36,70,26,P.l)+`<clipPath id="${id2}"><circle cx="36" cy="70" r="26"/></clipPath><g clip-path="url(#${id2})">${C(36+dx,70,26,P.d)}</g>`+C(14,60,3,P.a)}
+  if(SH[id]==='land'){const rr=7+n*.9;return top+C(36,74,rr,P.a)+`<rect x="-6" y="74" width="76" height="24" fill="${P.d}"/><rect x="-6" y="80" width="76" height="18" fill="${P.l}"/><rect x="-6" y="85" width="76" height="13" fill="${P.d}"/>`}
+  return top+wave(66,2+(n%5)*.7,n*.6,P.l,2)+wave(74,2.4+(n%4)*.6,n*.5+1.5,P.d,2.5)+wave(82,2.6,n*.4+3,P.a,3);
+}
+function cardHTML(s,c){const t=TAG[c.tag];
+  return `<div class="cw"><article class="card" aria-label="${esc(s.name)} ${c.n}: ${esc(c.title)}"><div class="fr" style="--c:${PAL[s.id].bg}"><div class="paper"><div class="ribbon"><span>${s.name}</span><b>${c.n}</b></div><div class="in2"><div class="ttl">${esc(c.title)}</div><div class="txt">${esc(c.text)}</div><div class="sp"></div><div class="ft"><span class="pill">${c.time}</span><span class="tg" role="img" aria-label="${t.label}">${svgIcon(t.d)}</span></div></div><div class="hollyB"><svg viewBox="0 0 40 40"><path d="M20 22c-6-1-12-6-14-13 7 0 13 4 14 13z" fill="#2F9E62"/><path d="M20 22c6-1 12-6 14-13-7 0-13 4-14 13z" fill="#2F9E62"/><path d="M20 22c-5 3-8 8-8 14 6-1 9-7 8-14z" fill="#2F9E62" opacity=".85"/><circle cx="20" cy="22" r="4.2" fill="#D7263D"/><circle cx="14.5" cy="26" r="3.4" fill="#D7263D"/><circle cx="25.5" cy="26" r="3.4" fill="#D7263D"/><circle cx="19" cy="20.8" r="1" fill="#fff" opacity=".6"/></svg></div></div></div></article></div>`}
+const backHTML=()=>`<div class="cw"><div class="back"><svg viewBox="0 0 63 88" aria-hidden="true"><rect width="63" height="88" fill="#14392F"/>
+  <circle cx="0" cy="0" r="22" fill="${DATA.suits[0].pal.bg}"/><circle cx="63" cy="0" r="22" fill="${DATA.suits[1].pal.bg}"/><circle cx="0" cy="88" r="22" fill="${DATA.suits[2].pal.bg}"/><circle cx="63" cy="88" r="22" fill="${DATA.suits[3].pal.bg}"/>
+  <circle cx="31.5" cy="44" r="22" fill="${DATA.suits[4].pal.bg}" fill-opacity=".3"/><circle cx="31.5" cy="44" r="15" fill="#F7D58B"/>
+  <g transform="translate(27.3 32.2) scale(.36)"><path d="M19 2.2a2.6 2.6 0 1 0 0 5.2 2.6 2.6 0 1 0 0-5.2zM3.5 17.5C3.5 10.5 8.5 6.2 15.6 7.2c-1.4 2.8-1.8 6.3-1.2 10.3zM3 18.2h15.6a1.9 1.9 0 0 1 0 3.8H3a1.9 1.9 0 0 1 0-3.8z" fill="#2C3956"/></g>
+  <text x="31.5" y="46.3" text-anchor="middle" font-family="DM Sans,sans-serif" font-weight="700" font-size="4.2" fill="#2C3956" letter-spacing=".3">${DATA.button}</text></svg></div></div>`;
+
+/* ---- grain tile, made once ---- */
+(function(){try{const c=document.createElement('canvas');c.width=c.height=200;const x=c.getContext('2d'),im=x.createImageData(200,200);
+  for(let i=0;i<40000;i++){im.data[i*4]=44;im.data[i*4+1]=57;im.data[i*4+2]=86;im.data[i*4+3]=Math.pow(Math.random(),1.8)*.13*255}
+  x.putImageData(im,0,0);document.documentElement.style.setProperty('--grain',`url(${c.toDataURL()})`)}catch(e){}})();
+
+/* ---- helpers ---- */
+const $=id=>document.getElementById(id);
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ALL=DATA.suits.flatMap(s=>s.cards.map(c=>({s,c})));
+const keyOf=x=>x.s.id+x.c.n;
+const ptsOf=c=>parseInt(c.time,10)||1;
+const ptsTxt=n=>n+(n===1?' pt':' pts');
+const MODES={any:{label:''},'tag-b':{label:'Everyone plays',tag:'b'},'tag-a':{label:'Spotlight',tag:'a'}};
+DATA.suits.forEach(su=>{MODES['suit-'+su.id]={label:su.name,suits:[su.id]}});
+const PRAISE_CARD=['Nicely done!','That was a good one.','The table approves.','Ho ho hooray!','Great sport.','Merry and bright.'];
+const state={noprops:false,hist:[],cur:null,mode:'any',suit:DATA.suits[0].id,names:[],round:null};
+try{state.noprops=localStorage.getItem('mm.noprops')==='1'}catch(e){}
+$('pub').checked=state.noprops;
+$('pub').onchange=e=>{state.noprops=e.target.checked;try{localStorage.setItem('mm.noprops',state.noprops?'1':'0')}catch(err){}};
+
+function pick(kind){
+  const m=MODES[kind]||MODES.any;
+  let pool=ALL.filter(x=>(!state.noprops||x.c.tag!=='t')&&(!m.suits||m.suits.includes(x.s.id))&&(!m.tag||x.c.tag===m.tag));
+  if(!pool.length)pool=ALL;
+  const fresh=pool.filter(x=>!state.hist.includes(keyOf(x)));
+  if(fresh.length)pool=fresh;else state.hist=[];
+  const x=pool[Math.floor(Math.random()*pool.length)];state.hist.push(keyOf(x));if(state.hist.length>50)state.hist.shift();return x;
+}
+
+/* ---- screens ---- */
+const screens=['home','setup','card','deck','about','done'];
+function show(name,push){
+  screens.forEach(n=>$('s-'+n).hidden=n!==name);
+  if(name!=='card')stopTimer(true);
+  if(push!==false&&location.hash!=='#'+name){try{history.pushState(null,'','#'+name)}catch(e){}}
+  window.scrollTo(0,0);
+  const h=$('s-'+name).querySelector('h1,h2,.brand');if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+}
+addEventListener('popstate',()=>{const n=location.hash.slice(1);show(screens.includes(n)&&(n!=='card'||state.cur)?n:'home',false)});
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const n=b.dataset.go;if(n==='deck')renderDeck();if(n==='home')state.round=null;show(n)});
+$('ic-b').innerHTML=svgIcon(TAG.b.d);$('ic-a').innerHTML=svgIcon(TAG.a.d);$('ic-t').innerHTML=svgIcon(TAG.t.d);
+
+/* ---- card screen ---- */
+function openCard(x,kind){
+  state.cur=x;
+  $('fBack').innerHTML=backHTML();$('fFront').innerHTML=cardHTML(x.s,x.c);
+  const fl=$('flip');fl.classList.remove('shown');
+  show('card');
+  $('cardKind').textContent=state.round?('Card '+state.round.n+' of '+state.round.total):(kind||'');
+  $('msg').textContent='';$('msg').classList.remove('ok');
+  renderTurn();
+  stopTimer(true);renderTimer();renderActions();
+  setTimeout(()=>fl.classList.add('shown'),reduce?20:120);
+}
+function renderTurn(){
+  const r=state.round,t=$('turn'),b=$('board');
+  if(!r){t.hidden=true;t.textContent='';b.textContent='';return}
+  t.hidden=!r.named;t.textContent=r.named?'Now up: '+r.players[r.turn].name:'';
+  b.textContent=r.named?r.players.map(p=>p.name+' '+p.score).join(' · '):'Table score: '+r.players[0].score;
+}
+function renderActions(){
+  const a=$('actions'),x=state.cur,pts=ptsOf(x.c),r=state.round;let h='';
+  if(r){
+    if(x.c.tag==='b'&&r.named){
+      h+=`<div class="lbl">Who won? Tap a name for +${ptsTxt(pts)}</div><div class="chips">`+r.players.map((p,i)=>`<button class="chip" data-w="${i}">${esc(p.name)}</button>`).join('')+`</div><button class="btn" id="aNobody">Nobody. Next card</button>`;
+    }else{
+      h+=`<button class="btn primary" id="aDone">Done +${ptsTxt(pts)}</button><button class="btn" id="aSkip">Skip</button>`;
+    }
+  }else if(state.mode==='open'){
+    h+=`<button class="btn primary" id="aDid">I did it</button><button class="btn" id="aDeck">Back to all cards</button>`;
+  }else{
+    h+=`<button class="btn primary" id="aDid">I did it</button><button class="btn" id="aMore">Another card</button>`;
+  }
+  a.innerHTML=h;
+  const on=(id,f)=>{const e=$(id);if(e)e.onclick=f};
+  on('aMore',()=>draw(state.mode));
+  on('aDeck',()=>show('deck'));
+  on('aDid',()=>{const m=$('msg');m.textContent=PRAISE_CARD[Math.floor(Math.random()*PRAISE_CARD.length)];m.classList.add('ok')});
+  on('aDone',()=>resolve(r.turn,pts));
+  on('aSkip',()=>resolve(null,0));
+  on('aNobody',()=>resolve(null,0));
+  a.querySelectorAll('[data-w]').forEach(b=>b.onclick=()=>resolve(+b.dataset.w,pts));
+}
+function draw(kind){state.mode=kind||'any';openCard(pick(state.mode),MODES[state.mode]?MODES[state.mode].label:'')}
+$('boost').onclick=()=>{state.round=null;draw('any')};
+$('mEveryone').onclick=()=>{state.round=null;draw('tag-b')};
+$('mSpot').onclick=()=>{state.round=null;draw('tag-a')};
+$('chips').innerHTML=DATA.suits.map(su=>`<button class="chip" data-suit="${su.id}"><i style="background:${PAL[su.id].bg}"></i>${su.name}</button>`).join('');
+$('chips').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{state.round=null;draw('suit-'+b.dataset.suit)});
+$('cardBack').onclick=()=>{state.round=null;state.mode==='open'?show('deck'):show('home')};
+
+/* ---- quick round: players, turns, score ---- */
+function renderPlayers(){
+  $('pList').innerHTML=state.names.map((n,i)=>`<button class="chip" data-i="${i}" aria-label="Remove ${esc(n)}">${esc(n)} <span class="x" aria-hidden="true">×</span></button>`).join('');
+  $('pList').querySelectorAll('.chip').forEach(b=>b.onclick=()=>{state.names.splice(+b.dataset.i,1);renderPlayers()});
+}
+$('mRound').onclick=()=>{$('pMsg').textContent='';renderPlayers();show('setup')};
+$('pForm').onsubmit=e=>{e.preventDefault();const v=$('pName').value.trim();
+  if(!v)return;
+  if(state.names.length>=8){$('pMsg').textContent='That is 8 players. Enough!';return}
+  if(state.names.some(n=>n.toLowerCase()===v.toLowerCase())){$('pMsg').textContent='That name is taken. Add a last initial.';return}
+  state.names.push(v);$('pName').value='';$('pMsg').textContent='';renderPlayers();$('pName').focus()};
+function startRound(named){
+  state.mode='any';state.hist=[];
+  state.round={named,players:named?state.names.map(n=>({name:n,score:0})):[{name:'Table',score:0}],turn:0,n:0,total:10,flash:''};
+  nextCard();
+}
+$('pStart').onclick=()=>{if(state.names.length<2){$('pMsg').textContent='Add at least 2 names, or play without names.';return}startRound(true)};
+$('pNoNames').onclick=()=>startRound(false);
+function nextCard(){
+  const r=state.round;
+  if(r.n>=r.total){showDone();return}
+  r.n++;draw('any');
+  if(r.flash){const m=$('msg');m.textContent=r.flash;m.classList.add('ok')}
+}
+function resolve(i,pts){
+  const r=state.round;
+  if(i!==null&&pts){r.players[i].score+=pts;r.flash=(r.named?r.players[i].name:'The table')+' scores '+ptsTxt(pts)+'!'}
+  else r.flash='';
+  r.turn=(r.turn+1)%r.players.length;
+  nextCard();
+}
+function showDone(){
+  const r=state.round,sorted=r.players.slice().sort((a,b)=>b.score-a.score);
+  let title,sub;
+  if(r.named){
+    const top=sorted.filter(p=>p.score===sorted[0].score);
+    if(sorted[0].score===0){title='Everyone is a winner.';sub='Nobody scored this time. Play another round?'}
+    else if(top.length===1){title=top[0].name+' wins the round!';sub='Ho ho hooray!'}
+    else{title='A tie at the top!';sub=top.map(p=>p.name).join(' and ')+' share the crown.'}
+  }else{title='Round complete!';sub='Table score: '+ptsTxt(r.players[0].score)}
+  $('h-done').textContent=title;$('doneSub').textContent=sub;
+  $('scoreList').innerHTML=r.named?sorted.map(p=>`<li><span>${esc(p.name)}</span><span>${ptsTxt(p.score)}</span></li>`).join(''):'';
+  const b=document.querySelector('#s-done .badge');if(b){b.style.animation='none';void b.offsetWidth;b.style.animation=''}
+  show('done');
+}
+$('dAgain').onclick=()=>{const r=state.round;if(r)startRound(r.named&&state.names.length>=2);else show('home')};
+$('dHome').onclick=()=>{state.round=null;show('home')};
+
+/* ---- timer ---- */
+let tm=null,wl=null;
+async function lock(){try{wl=await navigator.wakeLock.request('screen')}catch(e){}}
+function unlock(){try{wl&&wl.release()}catch(e){}wl=null}
+function fmt(s){s=Math.max(0,Math.ceil(s));return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')}
+const TIMER_SEC=60;
+function renderTimer(){
+  $('timer').innerHTML=`<button class="btn" id="tStart">Start ${TIMER_SEC}-sec timer</button>`;
+  $('tStart').onclick=()=>startTimer(TIMER_SEC);
+}
+function startTimer(total){
+  const R=34,Cc=2*Math.PI*R,end=Date.now()+total*1000;
+  $('timer').innerHTML=`<div class="ring"><svg viewBox="0 0 76 76" aria-hidden="true"><circle class="bg" cx="38" cy="38" r="${R}"/><circle class="fg" id="tFg" cx="38" cy="38" r="${R}" stroke-dasharray="${Cc}" stroke-dashoffset="0"/></svg><span id="tTxt">${fmt(total)}</span></div><button class="btn" id="tStop">Stop</button>`;
+  $('tStop').onclick=()=>{stopTimer(true);renderTimer()};
+  lock();
+  const tick=()=>{const left=(end-Date.now())/1000;
+    $('tTxt').textContent=fmt(left);$('tFg').setAttribute('stroke-dashoffset',String(Cc*(1-Math.max(0,left)/total)));
+    if(left<=0){stopTimer(true);$('timer').innerHTML=`<button class="btn" id="tStart">Run it again</button>`;$('tStart').onclick=()=>startTimer(total);$('msg').textContent="Time is up!";$('msg').classList.add('ok')}};
+  tm=setInterval(tick,250);tick();
+}
+function stopTimer(quiet){if(tm){clearInterval(tm);tm=null}unlock();if(!quiet)$('msg').textContent=''}
+
+/* ---- all cards ---- */
+function renderDeck(){
+  const tabs=$('tabs');
+  tabs.innerHTML=DATA.suits.map(s=>`<button class="tab" role="tab" data-s="${s.id}" aria-selected="${s.id===state.suit}"><i style="background:${PAL[s.id].bg}"></i>${s.name}</button>`).join('');
+  tabs.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{state.suit=b.dataset.s;renderDeck()});
+  const s=DATA.suits.find(x=>x.id===state.suit);
+  $('grid').innerHTML=s.cards.map(c=>`<button class="tile" data-n="${c.n}" aria-label="Open ${esc(s.name)} ${c.n}: ${esc(c.title)}">${cardHTML(s,c)}</button>`).join('');
+  $('grid').querySelectorAll('.tile').forEach(t=>t.onclick=()=>{state.round=null;state.mode='open';openCard({s,c:s.cards.find(c=>c.n===+t.dataset.n)},s.name)});
+}
+
+if('serviceWorker' in navigator&&location.protocol!=='file:'&&!/__NOSW__/.test('sw')){navigator.serviceWorker.register('sw.js').catch(()=>{})}
+show('home',false);
+</script>
+</body></html>
